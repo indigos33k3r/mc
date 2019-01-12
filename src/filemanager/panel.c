@@ -1712,7 +1712,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
         align_crt_t justify;    /* Which mode. */
         gboolean set_justify = TRUE;    /* flag: set justification mode? */
         gboolean found = FALSE;
-        size_t klen;
+        size_t klen = 0;
 
         darr = g_new0 (format_item_t, 1);
         home = g_slist_append (home, darr);
