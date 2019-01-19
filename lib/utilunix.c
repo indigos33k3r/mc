@@ -846,8 +846,9 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
     if (lpath[0] == '\0' || lpath[1] == '\0')
         return;
 
-    /* Collapse multiple slashes */
     if ((flags & CANON_PATH_JOINSLASHES) != 0)
+    {
+        /* Collapse multiple slashes */
         for (p = lpath; *p != '\0'; p++)
             if (IS_PATH_SEP (p[0]) && IS_PATH_SEP (p[1]) && (p == lpath || *(p - 1) != ':'))
             {
@@ -857,13 +858,13 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 str_move (p + 1, s);
             }
 
-    /* Collapse "/./" -> "/" */
-    if ((flags & CANON_PATH_JOINSLASHES) != 0)
+        /* Collapse "/./" -> "/" */
         for (p = lpath; *p != '\0';)
             if (IS_PATH_SEP (p[0]) && p[1] == '.' && IS_PATH_SEP (p[2]))
                 str_move (p, p + 2);
             else
                 p++;
+    }
 
     if ((flags & CANON_PATH_REMSLASHDOTS) != 0)
     {
