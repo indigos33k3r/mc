@@ -507,7 +507,7 @@ static void
 switch_to_listing (int panel_index)
 {
     if (get_display_type (panel_index) != view_listing)
-        set_display_type (panel_index, view_listing);
+        create_panel (panel_index, view_listing);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1528,11 +1528,11 @@ void
 info_cmd_no_menu (void)
 {
     if (get_display_type (0) == view_info)
-        set_display_type (0, view_listing);
+        create_panel (0, view_listing);
     else if (get_display_type (1) == view_info)
-        set_display_type (1, view_listing);
+        create_panel (1, view_listing);
     else
-        set_display_type (current_panel == left_panel ? 1 : 0, view_info);
+        create_panel (current_panel == left_panel ? 1 : 0, view_info);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1541,11 +1541,11 @@ void
 quick_cmd_no_menu (void)
 {
     if (get_display_type (0) == view_quick)
-        set_display_type (0, view_listing);
+        create_panel (0, view_listing);
     else if (get_display_type (1) == view_quick)
-        set_display_type (1, view_listing);
+        create_panel (1, view_listing);
     else
-        set_display_type (current_panel == left_panel ? 1 : 0, view_quick);
+        create_panel (current_panel == left_panel ? 1 : 0, view_quick);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1593,7 +1593,7 @@ setup_listing_format_cmd (void)
 void
 panel_tree_cmd (void)
 {
-    set_display_type (MENU_PANEL_IDX, view_tree);
+    create_panel (MENU_PANEL_IDX, view_tree);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1601,7 +1601,7 @@ panel_tree_cmd (void)
 void
 info_cmd (void)
 {
-    set_display_type (MENU_PANEL_IDX, view_info);
+    create_panel (MENU_PANEL_IDX, view_info);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1611,7 +1611,7 @@ quick_view_cmd (void)
 {
     if (PANEL (get_panel_widget (MENU_PANEL_IDX)) == current_panel)
         change_panel ();
-    set_display_type (MENU_PANEL_IDX, view_quick);
+    create_panel (MENU_PANEL_IDX, view_quick);
 }
 
 /* --------------------------------------------------------------------------------------------- */
