@@ -587,7 +587,7 @@ init_layout (void)
 static void
 panel_do_cols (int idx)
 {
-    if (get_display_type (idx) == view_listing)
+    if (get_panel_type (idx) == view_listing)
         set_panel_formats (PANEL (panels[idx].widget));
     else
         panel_update_cols (panels[idx].widget, frame_half);
@@ -601,7 +601,7 @@ restore_into_right_dir_panel (int idx, Widget * from_widget)
 {
     WPanel *new_widget;
     const char *saved_dir = panels[idx].last_saved_dir;
-    gboolean last_was_panel = (from_widget && get_display_type (idx) != view_listing);
+    gboolean last_was_panel = (from_widget && get_panel_type (idx) != view_listing);
     const char *p_name = get_nth_panel_name (idx);
 
     if (last_was_panel)
@@ -1233,7 +1233,7 @@ swap_panels (void)
 /* --------------------------------------------------------------------------------------------- */
 
 panel_view_mode_t
-get_display_type (int idx)
+get_panel_type (int idx)
 {
     return panels[idx].type;
 }
@@ -1303,7 +1303,7 @@ get_other_type (void)
 void
 save_panel_dir (int idx)
 {
-    panel_view_mode_t type = get_display_type (idx);
+    panel_view_mode_t type = get_panel_type (idx);
     Widget *widget = get_panel_widget (idx);
 
     if ((type == view_listing) && (widget != NULL))
@@ -1332,7 +1332,7 @@ get_panel_dir_for (const WPanel * widget)
     if (i >= MAX_VIEWS)
         return g_strdup (".");
 
-    if (get_display_type (i) == view_listing)
+    if (get_panel_type (i) == view_listing)
     {
         vfs_path_t *cwd_vpath;
 

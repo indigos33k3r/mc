@@ -506,7 +506,7 @@ configure_panel_listing (WPanel * p, int list_format, int brief_cols, gboolean u
 static void
 switch_to_listing (int panel_index)
 {
-    if (get_display_type (panel_index) != view_listing)
+    if (get_panel_type (panel_index) != view_listing)
         create_panel (panel_index, view_listing);
 }
 
@@ -1527,9 +1527,9 @@ save_setup_cmd (void)
 void
 info_cmd_no_menu (void)
 {
-    if (get_display_type (0) == view_info)
+    if (get_panel_type (0) == view_info)
         create_panel (0, view_listing);
-    else if (get_display_type (1) == view_info)
+    else if (get_panel_type (1) == view_info)
         create_panel (1, view_listing);
     else
         create_panel (current_panel == left_panel ? 1 : 0, view_info);
@@ -1540,9 +1540,9 @@ info_cmd_no_menu (void)
 void
 quick_cmd_no_menu (void)
 {
-    if (get_display_type (0) == view_quick)
+    if (get_panel_type (0) == view_quick)
         create_panel (0, view_listing);
-    else if (get_display_type (1) == view_quick)
+    else if (get_panel_type (1) == view_quick)
         create_panel (1, view_listing);
     else
         create_panel (current_panel == left_panel ? 1 : 0, view_quick);
